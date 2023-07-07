@@ -1,42 +1,85 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link :to="{ name: 'About' }">About</router-link> |
-    <router-link :to="{ name: 'Todo' }">Todo</router-link>
-  </nav>
-  <router-view/>
+  <div id="app">
+    <header>
+      <nav>
+        <ul>
+          <li :class="{ active: $route.path === '/' }"><router-link to="/">CUACA</router-link></li>
+          <li :class="{ active: $route.path === '/location' }"><router-link to="/location">LOKASI</router-link></li>
+          <li :class="{ active: $route.path === '/stopwatch' }"><router-link to="/stopwatch">STOPWATCH</router-link></li>
+          <li :class="{ active: $route.path === '/tictactoe' }"><router-link to="/tictactoe">GAMES</router-link></li>
+          <li :class="{ active: $route.path === '/photo' }"><router-link to="/photo">WALLPAPER</router-link></li>
+        </ul>
+      </nav>
+    </header>
+    <router-view></router-view>
+  </div>
 </template>
 
+<script>
+export default {
+  name: 'App',
+};
+</script>
+
 <style>
+body {
+  background-image: url('https://1.bp.blogspot.com/-DuRtgmaUhIk/YGFXVkyq3DI/AAAAAAAAIMQ/i80mKqCTfesgRpUd1V7QPmkJ6DEahRWLwCLcBGAsYHQ/s16000/biru-pastel.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  padding: 20px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+header {
+  background: linear-gradient(to right, #040432, #063eae);
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(255, 248, 248, 0.2);
 }
 
 nav {
-  padding: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav li {
+  margin-right: 10px;
 }
 
 nav a {
-  font-weight: bold;
-  color: #2c3e50;
+  position: relative;
+  color: #fff;
   text-decoration: none;
-  padding: 10px;
-  border-radius: 4px;
+  padding: 5px 10px;
 }
 
-nav a.router-link-exact-active {
-  color: white;
-  background: rgba(0, 0, 0, 0.75);
+nav a:before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  transform: scaleX(0);
+  transition: transform 0.3s;
 }
 
-body {
-  background-image: url("https://images.pexels.com/photos/1097930/pexels-photo-1097930.jpeg");
-  background-size: 100%100%;
-  background-attachment: fixed;
+nav li.active a:before {
+  transform: scaleX(1);
 }
-
 </style>
